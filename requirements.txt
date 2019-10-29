@@ -1,0 +1,7 @@
+numpy
+scipy
+sklearn
+xgboost
+matplotlib
+pandas>=0.24
+tpot
