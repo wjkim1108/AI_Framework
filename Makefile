@@ -13,11 +13,14 @@ what:
 gui: $(TARGET)
 	python3 $(TARGET)
 
-guid: $(TARGET)
+guid: $(TARGET) Data/SeA/params_merged_Toshiba_2018.csv
 	python3 $(TARGET) -i Data/SeA/inputs.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
 
-guid5: $(TARGET)
+guid5: $(TARGET) Data/SeA/params_merged_Toshiba_2018.csv
 	python3 $(TARGET) -i Data/SeA/inputs5.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+Data/SeA/params_merged_Toshiba_2018.csv: Data/SeA/params_merged_Toshiba_2018.csv.gz
+	gzip -d Data/SeA/params_merged_Toshiba_2018.csv.gz
 
 iris: $(TARGET)
 	python3 $(TARGET) -i Data/iris/inputs.csv -o Data/iris/outputs.csv -d Data/iris/iris.csv
