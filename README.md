@@ -2,6 +2,8 @@
 
 Ver. 1.3.1 2019-10-31
 
+For demonstration only until 2019-11-30
+
 
 # User Manual
 See Doc folder for user manual.
