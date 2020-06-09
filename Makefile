@@ -25,6 +25,9 @@ Data/SeA/params_merged_Toshiba_2018.csv: Data/SeA/params_merged_Toshiba_2018.csv
 iris: $(TARGET)
 	python3 $(TARGET) -i Data/iris/inputs.csv -o Data/iris/outputs.csv -d Data/iris/iris.csv
 
+irisk: $(TARGET)
+	python3 $(TARGET) -i Data/iris/inputs_k.csv -o Data/iris/outputs_k.csv -d Data/iris/iris_k.csv
+
 wine: $(TARGET)
 	python3 $(TARGET) -i Data/wine/inputs.csv -o Data/wine/outputs.csv -d Data/wine/wine.csv
 
