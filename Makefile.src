@@ -1,0 +1,478 @@
+DOXYFILE = Doxyfile
+
+TARGET2 = main_gui.py
+
+UI_FILES = ui/auto_ml_ui.py ui/categorical_select_ui.py ui/classification_ui.py ui/feature_selection_ui.py ui/forecasting_ui.py ui/main_window_ui.py ui/normalize_values_ui.py ui/read_csv_ui.py ui/regression_ui.py ui/replace_missing_values_ui.py ui/select_rows_ui.py ui/set_data_type_ui.py ui/set_role_ui.py ui/setting_dialog_ui.py ui/stl_stationarity_time_series_dialog_ui.py ui/view_graph_dialog_ui.py ui/view_table_dialog_ui.py ui/view_time_series_dialog_ui.py
+
+
+what:
+	@echo "Usage:"
+	@echo "	nguixx - Use n before gui for New GUI"
+	@echo "	np1    - Project File Test"
+	@echo "	nt1    - Template File Test"
+	@echo "	gui    - Start Simple GUI"
+	@echo "	guid   - Start GUI with data, input columns, and output columns"
+	@echo "	guid5  - Start GUI with data, 5 input columns, and output columns"
+	@echo "	guits  - Start GUI with Time Series data, input columns, and output columns"
+	@echo "	guits1 - Start GUI with Air Passenger Time Series data, input columns, and output columns"
+	@echo "	guidc  - Start GUI with C-Company data, input columns, and output columns"
+	@echo "	guidd  - Start GUI with D-Company data, input columns, and output columns"
+	@echo "	guidy  - Start GUI with Y-Company data, input columns, and output columns"
+	@echo "	req    - Install required environments for PyQt4 and PyQt5"
+	@echo "	tumorf - Genes Analysis with Feature Selection Only"
+	@echo "	tumorc - Genes Analysis with Classification Only"
+	@echo "	tumor  - Genes Analysis with Feature Selectin and Classification"
+	@echo "	b      - B Company Data"
+	@echo "	abn    - Abnormality Detection"
+	@echo "	ts     - Time Series Forecasting example"
+	@echo "	web    - Web Version for Internal IPs; Requires DJango Environment"
+	@echo "	webe   - Web Version for External IPs; Requires DJango Environment"
+	@echo "	cfs    - Categorical Feature Selection"
+
+
+DIST_DIR = ../AI_Framework
+DIST_DIR_UI = ../AI_Framework/ui
+
+$(TARGET2): Models
+
+# $(TARGET2):  $(UI_FILES)
+# 	cd ui; make
+
+Models:
+	mkdir -p Models
+
+nb:
+	@echo "Requires tf36 environment"
+	jupyter notebook
+
+ngui: $(TARGET2)
+	python3 $(TARGET2)
+
+nguidc: $(TARGET2)
+	python $(TARGET2) -i Data/Cubic/C_inputs.csv -o Data/Cubic/C_output.csv -d Data/Cubic/C_Company_0219_V2.csv
+
+nguidd: $(TARGET2)
+	python $(TARGET2) -i Data/Cubic/D_inputs.csv -o Data/Cubic/D_output.csv -d Data/Cubic/D_Company_210119.v0.3.csv
+
+nguidy: $(TARGET2)
+	python $(TARGET2) -i Data/Cubic/Y_inputs.csv -o Data/Cubic/Y_output.csv -d Data/Cubic/Y_Company_210119_v0.3.csv
+
+#
+# Project Test
+#
+#	AutoML
+pa: $(TARGET2)
+	python $(TARGET2) -p Projects/automl.aif
+
+pf1: $(TARGET2)
+	python $(TARGET2) -p Projects/AP_forecasting1.aif
+
+preg5: $(TARGET2)
+	python $(TARGET2) -p  Projects/regression5.aif
+
+# Classification for Breast Cancer
+pbr: $(TARGET2)
+	python $(TARGET2) -p  Projects/class_br.aif
+
+piris: $(TARGET2)
+	python $(TARGET2) -p  Projects/class_iris.aif
+
+pwine: $(TARGET2)
+	python $(TARGET2) -p  Projects/class_wine.aif
+
+# Regression for B Company data - Not good
+pb:
+	python $(TARGET2) -d Data/B_Company/B_PreProcessed_20202715_R1.csv -o Data/B_Company/outputs.csv -i Data/B_Company/inputs.csv
+
+# Regression for C Company data
+pcr: $(TARGET2)
+	python $(TARGET2) -p  Projects/regression_c_company.aif
+
+# Classification for D Company data
+pdc: $(TARGET2)
+	python $(TARGET2) -p  Projects/class_d_company.aif
+
+# Regression for D Company data
+pdr: $(TARGET2)
+	python $(TARGET2) -p  Projects/regression_d_company.aif
+
+# Regression for Sea Company data
+psr: $(TARGET2)
+	python $(TARGET2) -p  Projects/regression_SeA.aif
+
+# Classification for Y Company data
+pyc: $(TARGET2)
+	python $(TARGET2) -p  Projects/class_y_company.aif
+
+pk02:
+	python $(TARGET2) -i  Data/KAMP/02_Ford/inputs.csv -o  Data/KAMP/02_Ford/output.csv -d  Data/KAMP/02_Ford/FordA_all.csv
+
+# Feature Selection using wine data
+pfs: $(TARGET2)
+	python $(TARGET2) -p  Projects/feature_selection.aif
+
+# CNN
+pcnn: $(TARGET2)
+	python $(TARGET2) -p  Projects/cnn.aif
+
+# Forecast with Prophet
+pfp: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_prophet.aif
+
+# Forecast with ARIMA
+pfarma: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_arma.aif
+
+pfarima: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_arima.aif
+
+# Forecast with SARIMA
+pfsarima: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_sarima.aif
+
+# Forecast with VAR
+pfvar: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_var.aif
+
+# Forecast with VMA
+pfvma: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_vma.aif
+
+# Forecast with VRMA
+pfvarma: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_varma.aif
+
+# Forecast with VARMAX
+pfvarmax: $(TARGET2)
+	python $(TARGET2) -p Projects/forecast_varmax.aif
+
+# Classification for FordA
+pfc: $(TARGET2)
+	python $(TARGET2) -p Projects/class_ford.aif
+
+#
+#
+#
+nc: $(TARGET2)
+	python3 $(TARGET2) -i Data/Commax20191120/inputs.csv -o Data/Commax20191120/outputs.csv -d Data/Commax20191120/commax2_monthly.csv
+
+# Template Test
+nt1: $(TARGET2)
+	python3 $(TARGET2) -t Templates/forecasting1.ait
+
+nguif: $(TARGET2)
+	python3 $(TARGET2) -i  Data/KAMP/02_Ford/inputs.csv -o  Data/KAMP/02_Ford/output.csv -d  Data/KAMP/02_Ford/FordA_all.csv
+
+nguid: $(TARGET2) Data/SeA/params_merged_Toshiba_2018.csv
+	python3 $(TARGET2) -i Data/SeA/inputs.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+nguid_t: $(TARGET2)
+	python3 $(TARGET2) -i Data/SeA/inputs.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018_t.csv
+
+nguid5: $(TARGET2) Data/SeA/params_merged_Toshiba_2018.csv
+	python3 $(TARGET2) -i Data/SeA/inputs5.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+nguits: $(TARGET2)
+	python3 $(TARGET2) -i Data/Superstore/inputs.csv -o Data/Superstore/output.csv -d Data/Superstore/Superstore.xls.csv
+
+nguits1: $(TARGET2)
+	python3 $(TARGET2) -i Data/AirPassengers_input.csv -o Data/AirPassengers_output.csv -d Data/AirPassengers.csv
+
+nguik08: $(TARGET2)
+	python3 $(TARGET2) -i Data/KAMP/08_Melting_Tank/dataset/inputs.csv -o Data/KAMP/08_Melting_Tank/dataset/output.csv -d Data/KAMP/08_Melting_Tank/dataset/melting_tank_num.csv
+
+niris: $(TARGET2)
+	python3 $(TARGET2) -i Data/iris/inputs.csv -o Data/iris/outputs.csv -d Data/iris/iris.csv
+
+niris_sr: $(TARGET2)
+	python3 $(TARGET2) -i Data/iris/inputs.csv -o Data/iris/outputs.csv -d Data/iris/iris_sr.csv
+
+nirisk: $(TARGET2)
+	python3 $(TARGET2) -i Data/iris/inputs_k.csv -o Data/iris/outputs_k.csv -d Data/iris/iris_k.csv
+
+nwine: $(TARGET2)
+	python3 $(TARGET2) -i Data/wine/inputs.csv -o Data/wine/outputs.csv -d Data/wine/wine.csv
+
+# Breast Cancer
+nbr: $(GUI_GRID_PY)
+	python3 $(TARGET2) -i Data/breast_cancer/inputs.csv -o Data/breast_cancer/outputs.csv -d Data/breast_cancer/breast_cancer.csv
+
+# GUI for PyQt5 of Predictive Maintenance with data preset using SeA Mechanics
+gui: $(GUI_GRID_PY)
+	python3 $(TARGET)
+
+
+k08: $(TARGET) $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/KAMP/08_Melting_Tank/dataset/inputs.csv -o Data/KAMP/08_Melting_Tank/dataset/output.csv -d Data/KAMP/08_Melting_Tank/dataset/melting_tank_num.csv
+
+# C, D, Y Company data
+guidc: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Cubic/C_inputs.csv -o Data/Cubic/C_output.csv -d Data/Cubic/C_Company_0219_V2.csv
+
+guidd: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Cubic/D_inputs.csv -o Data/Cubic/D_output.csv -d Data/Cubic/D_Company_210119.v0.3.csv
+
+guidy: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Cubic/Y_inputs.csv -o Data/Cubic/Y_output.csv -d Data/Cubic/Y_Company_210119_v0.3.csv
+
+
+# GUI Predictive Maintenance with data preset using SeA Mechanics
+guid: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/SeA/inputs.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+guid1: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/SeA/inputs.csv -o Data/SeA/outputs1.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+# iris Classification
+irisk: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/iris/inputs_k.csv -o Data/iris/outputs_k.csv -d Data/iris/iris_k.csv
+#	python3 $(TARGET) -i Data/iris/inputs_utf-8.csv -o Data/iris/outputs_utf-8.csv -d Data/iris/iris_utf-8.csv
+
+# iris Classification
+iris: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/iris/inputs.csv -o Data/iris/outputs.csv -d Data/iris/iris.csv
+
+# Wine Classification
+wine: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/wine/inputs.csv -o Data/wine/outputs.csv -d Data/wine/wine.csv
+
+# Breast Cancer Classification
+br: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/breast_cancer/inputs.csv -o Data/breast_cancer/outputs.csv -d Data/breast_cancer/breast_cancer.csv
+
+# Boston Housing Regression
+boston: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/boston/inputs.csv -o Data/boston/outputs.csv -d Data/boston/boston.csv
+
+# Super Store Sales Forecasting
+guits: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Superstore/inputs.csv -o Data/Superstore/outputs.csv -d Data/Superstore/Superstore.xls.csv
+
+# Air Passenger Forecasting
+guits1: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/AirPassengers_input.csv -o Data/AirPassengers_output.csv -d Data/AirPassengers.csv
+
+guid5: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/SeA/inputs5.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+gui51: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/SeA/inputs5.csv -o Data/SeA/outputs1.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+# for Otto Data
+guio: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Otto/inputs.csv -o Data/Otto/outputs.csv -d Data/Otto/train_num.csv
+
+guio10: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Otto/inputs10.csv -o Data/Otto/outputs.csv -d Data/Otto/train_num.csv
+
+guio25: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Otto/inputs25.csv -o Data/Otto/outputs.csv -d Data/Otto/train_num.csv
+
+# GUI Predictive Maintenance with data preset using Scania Trucks
+guis: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Scania/inputs.csv -o Data/Scania/outputs.csv -d Data/Scania/aps_failure_training_set.csv -s 20
+
+# GUI Predictive Maintenance with data preset using Scania Trucks
+guib: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/HAR/inputs.csv -o Data/HAR/outputs.csv -d Data/HAR/train_num.csv
+
+hhi0: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/HHI/01_RF_Param_Recommend/BLT_results.csv -o Data/HHI/01_RF_Param_Recommend/outputs.csv -i Data/HHI/01_RF_Param_Recommend/inputs.csv
+
+hhi1: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/HHI/dataset_min_mean_max.csv -o Data/HHI/outputs_org.csv -i Data/HHI/inputs.csv
+
+hhi: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/HHI/dataset_min_mean_max.csv -o Data/HHI/outputs.csv -i Data/HHI/inputs.csv
+
+hhih: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/HHI/dataset_min_mean_max.csv -o Data/HHI/outputsh.csv -i Data/HHI/inputs.csv
+
+hhiw: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/HHI/dataset_min_mean_max.csv -o Data/HHI/outputsw.csv -i Data/HHI/inputs.csv
+
+coad: $(GUI_GRID_PY)
+	python3 $(TARGET) -d ./COAD_gene_label.csv
+
+coadt: $(GUI_GRID_PY)
+	python3 $(TARGET) -d ./coad.csv -t 1
+#	python3 $(TARGET) -d /Data/GeneData/RawData/COAD_gene_label.csv -t 1
+
+b21: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_20200818_R1_1.csv -o Data/B_Company/B_20200818_R1_1_output.csv -i Data/B_Company/B_20200818_R1_1_inputs.csv
+
+b22: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_20200818_R1_1.csv -o Data/B_Company/B_20200818_R1_1_output2.csv -i Data/B_Company/B_20200818_R1_1_inputs.csv
+
+b23: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_20200818_R1_1_1000.csv -o Data/B_Company/B_20200818_R1_1_output2.csv -i Data/B_Company/B_20200818_R1_1_inputs.csv
+
+# Delay estimation
+b24: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_20200818_R1_2.csv -o Data/B_Company/B_20200818_R1_2_output.csv -i Data/B_Company/B_20200818_R1_1_inputs.csv
+
+b: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_PreProcessed_20202715_R1.csv -o Data/B_Company/outputs.csv -i Data/B_Company/inputs.csv
+
+b0: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_PreProcessed_20202715_R1.csv -o Data/B_Company/output0.csv -i Data/B_Company/inputs.csv
+
+b1: $(GUI_GRID_PY)
+	python3 $(TARGET) -d Data/B_Company/B_PreProcessed_20202715_R1.csv -o Data/B_Company/output1.csv -i Data/B_Company/inputs.csv
+
+# PyQt4 & PyQt5
+req2:
+	#sudo apt install python-qt4 qt4-default qt4-doc qt4-dev-tools pyqt4-dev-tools	# PyQt4 for python2
+	#sudo apt install python3-pyqt4	# PyQt4 for python3
+	#sudo apt install qt4-designer	# QT-Designer for PyQt4
+	#sudo apt install python-qwt5-qt4	# QT Widget 5 for PyQt4
+	sudo apt install python3-tk tk-dev
+	sudo apt install qt5-default	# PyQt5 for python3
+	sudo apt install pyqt5-dev pyqt5-dev-tools qttools5-dev-tools
+	pip install -r requirements.txt
+	@echo "After successful installation, Logout and Login in again!"
+
+req:
+	#sudo apt install python-qt4 qt4-default qt4-doc qt4-dev-tools pyqt4-dev-tools	# PyQt4 for python2
+	#sudo apt install python3-pyqt4	# PyQt4 for python3
+	#sudo apt install qt4-designer	# QT-Designer for PyQt4
+	sudo apt install python-qwt5-qt4	# QT Widget 5 for PyQt4
+	sudo apt install python3-tk tk-dev
+	sudo apt install qt5-default	# PyQt5 for python3
+	sudo apt install pyqt5-dev pyqt5-dev-tools qttools5-dev-tools
+	pip3 install -r requirements.txt
+	@echo "After successful installation, Logout and Login in again!"
+
+$(DIST_DIR):
+	mkdir -p $(DIST_DIR)
+
+$(DIST_DIR_UI):
+	mkdir -p $(DIST_DIR_UI)
+
+clean:
+	# cd Bosch; make clean
+	# cd HHI; make clean
+	# cd HHI_PQ; make clean
+	# cd HHI_QC; make clean
+	# cd NexPeria2; make clean
+	# cd PM_Test; make clean
+	# cd Predictive_Maintenance1; make clean
+	# cd Regression; make clean
+	# cd Scania_Binary_Classification; make clean
+	# cd scania-trucks; make clean
+	rm -rf html latex build __pycache__/
+	rm -f MenuBar_Grid4.py MenuBar_Grid.py MenuBar.py
+	rm -f *.c *.so ui/*.so ui/*.c
+
+ts:
+	python3 Time_Series_Forecastings.py
+
+# Commax Data Conversion
+cc:
+	python3 Commax_Convert.py
+
+cc2:
+	python3 Commax_Convert2.py
+	cat Data/Commax20191120/Production*.xlsx.csv > Data/Commax20191120/commax.csv
+	@echo "Remove second header line from merged file"
+
+cc3:
+	python3 Commax_Convert3.py
+
+# Commax Data Forecasting
+cf:
+	python3 Commax_Forecast.py -i Data/Commax/commax.csv -p 3
+
+cff:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax.csv -p 3
+
+# Commax data with artificially added data for 2019-11 and 2019-12
+cfm:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax_made.csv -p 3
+
+cff2:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax2.csv -p 3
+
+cf0:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax.csv -f 0
+
+cf1:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax.csv -f 1
+
+cf2:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax.csv -f 2
+
+cf3:
+	python3 Commax_Forecast.py -i Data/Commax20191120/commax.csv -f 3
+
+cv:
+	python3 Commax_VARMAX.py -i Data/Commax20191120/commax2_monthly.csv
+
+# Commax Data Forecasting
+cfa:
+	python3 Commax_Faults.py
+
+scania: $(GUI_GRID_PY)
+	python3 $(TARGET) -i Data/Scania/inputs.csv -o Data/Scania/outputs.csv -d Data/Scania/train.csv
+# -t Data/Scania/aps_failure_test_set.csv
+
+
+#guid5: $(GUI_GRID_PY)
+#	python3 $(TARGET) -i Data/SeA/inputs5.csv -o Data/SeA/outputs.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+#gui51: $(GUI_GRID_PY)
+#	python3 $(TARGET) -i Data/SeA/inputs5.csv -o Data/SeA/outputs1.csv -d Data/SeA/params_merged_Toshiba_2018.csv
+
+#hhi: $(GUI_GRID_PY)
+#	python3 $(TARGET) -d Data/HHI/dataset_min_mean_max.csv -o Data/HHI/outputs.csv -i Data/HHI/inputs.csv
+
+
+tumor:
+	time python3 Tumor_Genes_Analysis.py -f 1 -c 1
+
+tumorf:
+	time python3 Tumor_Genes_Analysis.py -f 1 -c 0
+
+tumorc:
+	time python3 Tumor_Genes_Analysis.py -f 0 -c 1
+
+web:
+	cd Web_AI_Framework; make run
+
+webe:
+	cd Web_AI_Framework; make rune
+
+# Predicting Remaining Useful Life Time: -n 1~4, 0 for all, -m 1 for CNN, 2 for LSTM, 0 for both
+rul:
+	@echo "Requires TensorFlow and Keras"
+	time python pm_rul_1d_cnn.py -n 0 -m 0
+
+rul1:
+	@echo "Requires TensorFlow and Keras"
+	time python pm_rul_1d_cnn.py -n 1 -m 0
+
+rul12:
+	@echo "Requires TensorFlow and Keras"
+	time python pm_rul_1d_cnn.py -n 1 -m 2
+
+rul2:
+	@echo "Requires TensorFlow and Keras"
+	time python pm_rul_1d_cnn.py -n 2 -m 0
+
+rul3:
+	@echo "Requires TensorFlow and Keras"
+	time python pm_rul_1d_cnn.py -n 3 -m 0
+
+rul4:
+	@echo "Requires TensorFlow and Keras"
+	time python pm_rul_1d_cnn.py -n 4 -m 0
+
+cfs:
+	@echo "	cfs    - Categorical Feature Selection"
+	time python3 categorical_feature_selection.py
+
+abn:
+	time python3 Time_Series_InfoBank.py
+
+deployed:
+	python deployed_model.py -i Models/inputs.csv -o Models/outputs.csv -b Models/best_model.csv -d Data/wine/wine.csv 
